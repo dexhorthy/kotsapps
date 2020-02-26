@@ -7,5 +7,5 @@ metadata:
 spec:
   descriptor:
     links:
-      - description: 'Example Application'
-        url: "http://example-nginx"
+      - description: 'Mongo Wire'
+        url: "http://mongodb"

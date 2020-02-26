@@ -4,29 +4,17 @@ metadata:
   name: collector-sample
 spec:
   collectors:
-    - clusterInfo: {}
-    - clusterResources: {}
-    - secret:
-        name: illmannered-cricket-mysql
-        namespace: default
-        key: mysql-password
-    - logs:
-        selector:
-          - name=nginx-ingress-microk8s
-        namespace: default
-        limits:
-          maxAge: 30d
-          maxLines: 10000
+    # root@docker-desktop:/# mongo --eval "db.adminCommand('ping')" --host 35.223.46.118:27017
+    # MongoDB shell version v4.0.16
+    # connecting to: mongodb://35.223.46.118:27017/?gssapiServiceName=mongodb
+    # Implicit session: session { "id" : UUID("720d5785-8971-4cd8-86b6-f2f4d44c5ceb") }
+    # MongoDB server version: 4.2.3
+    # WARNING: shell and server versions do not match
+    # { "ok" : 1 }
     - run:
-        collectorName: ping-google
-        namespace: default
-        image: flungo/netutils
-        command: ["ping"]
-        args: ["www.google.com"]
+        collectorName: mongo-ping
+        namespace: repl{{ Namespace }}
+        image: dexhorthy/mongo-shell-example
+        command: ["mongo"]
+        args: ["--eval", "--db.adminCommand('ping')", "--host", "mongodb:27017"]
         timeout: 5s
-    - http:
-        collectorName: test-get
-        get:
-          url: https://api.staging.replicated.com/market/v1/echo/ip
-          insecureSkipVerify: false
-          headers: {}
