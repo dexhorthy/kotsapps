@@ -9,6 +9,7 @@ spec:
     version: latest
   weave:
     version: latest
+    podCidrRange: "10.32.0.0/12"
   registry:
     version: latest
   kotsadm:
